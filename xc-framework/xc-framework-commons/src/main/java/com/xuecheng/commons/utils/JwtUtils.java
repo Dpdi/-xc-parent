@@ -60,7 +60,7 @@ public class JwtUtils {
     /**
      * 解析token
      */
-    private static Jws<Claims> parserToken(String token) {
+    public static Jws<Claims> parserToken(String token) {
         if(token.contains("Bearer")) {
             token = token.replaceAll("Bearer ","");
         }
@@ -75,7 +75,7 @@ public class JwtUtils {
         AuthInfo authInfo = new AuthInfo();
         authInfo.setUid(body.get("userId",Long.class));
         authInfo.setCompanyId(body.get("companyId",Long.class));
-        authInfo.setCompanyId(body.get("companyName",Long.class));
+        authInfo.setCompanyName(body.get("companyName",String.class));
         return authInfo;
     }
 }
