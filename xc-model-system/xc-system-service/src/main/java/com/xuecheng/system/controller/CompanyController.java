@@ -3,6 +3,7 @@ package com.xuecheng.system.controller;
 import com.xuecheng.commons.enums.ErrorCode;
 import com.xuecheng.commons.model.vo.CompanyVo;
 import com.xuecheng.commons.model.vo.ResponseResult;
+import com.xuecheng.commons.utils.AuthInfoHolder;
 import com.xuecheng.commons.utils.BeanHelper;
 import com.xuecheng.commons.utils.JwtUtils;
 import com.xuecheng.system.domain.Company;
@@ -41,15 +42,18 @@ public class CompanyController {
     @GetMapping("/mine")
     public ResponseResult mine(@RequestHeader("Authorization") String token) {
 
-        //1.判断token是否合法
-        Boolean verifyToken = JwtUtils.verifyToken(token);
-        if (!verifyToken) {
-            throw new BusinessException(ErrorCode.ERROR);
-        }
+//        //1.判断token是否合法
+//        Boolean verifyToken = JwtUtils.verifyToken(token);
+//        if (!verifyToken) {
+//            throw new BusinessException(ErrorCode.ERROR);
+//        }
+//
+//        //2.拿取token中的企业id
+//        Claims claims = JwtUtils.parserToken(token).getBody();
+//        Long companyId = claims.get("companyId", Long.class);
 
-        //2.拿取token中的企业id
-        Claims claims = JwtUtils.parserToken(token).getBody();
-        Long companyId = claims.get("companyId", Long.class);
+        //1.从ThreadLocal中取数据
+        Long companyId = AuthInfoHolder.getCompanyId();
 
         //3.调用service查询企业信息
         Company company = companyService.getById(companyId);
