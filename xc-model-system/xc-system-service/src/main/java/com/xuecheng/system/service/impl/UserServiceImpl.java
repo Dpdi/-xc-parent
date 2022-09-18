@@ -11,6 +11,7 @@ import com.xuecheng.system.domain.User;
 import com.xuecheng.system.mappers.UserMapper;
 import com.xuecheng.system.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xuecheng.web.exceptions.BusinessException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String password = dto.getPassword();
         String utype = dto.getUtype();
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || StringUtils.isEmpty(utype)) {
-            throw new RuntimeException("你输入的为空");
+            throw new BusinessException(ErrorCode.LOGINERROR);
         }
 
         //2.根据手机号用户类型查找数据
@@ -50,14 +51,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         //3.判断用户是否存在
         if (user == null) {
-            throw new RuntimeException("用户不存在");
+            throw new BusinessException(ErrorCode.LOGINERROR);
         }
 
         //4.判断密码是否正确
         String dbPassword = user.getPassword();
         password = SecureUtil.md5(password);
         if (!dbPassword.equals(password)) {
-            throw new RuntimeException(String.valueOf(ErrorCode.LOGINERROR));
+            throw new BusinessException(ErrorCode.LOGINERROR);
         }
 
         //5.准备返回数据

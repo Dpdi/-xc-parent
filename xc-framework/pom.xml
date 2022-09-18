@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>xc-framework-commons</module>
+        <module>xc-framework-web</module>
     </modules>
 
     <properties>
