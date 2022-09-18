@@ -9,17 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xc-framework</artifactId>
+    <artifactId>xc-model-content</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>xc-framework-commons</module>
-        <module>xc-framework-web</module>
-        <module>xc-framework-mybatis</module>
+        <module>xc-content-service</module>
     </modules>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
 
 </project>

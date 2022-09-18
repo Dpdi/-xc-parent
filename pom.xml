@@ -12,6 +12,7 @@
         <module>xc-framework</module>
         <module>xc-model-system</module>
         <module>xc-gateway</module>
+        <module>xc-model-content</module>
     </modules>
 
 
